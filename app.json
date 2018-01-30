@@ -1,0 +1,32 @@
+{
+  "pages": [
+    "pages/BaaS/BaaS",
+    "pages/index/index",
+    "pages/input/input",
+    "pages/help/help",
+    "pages/Feedback/Feedback",
+    "pages/version/version"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#bbdef8",
+    "navigationBarTitleText": "实验课表查询",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/BaaS/BaaS",
+        "text": "实验",
+        "iconPath": "image/index2.png",
+        "selectedIconPath": "image/index.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "关于",
+        "iconPath": "image/about2.png",
+        "selectedIconPath": "image/about.png"
+      }
+    ]
+  }
+}

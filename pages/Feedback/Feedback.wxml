@@ -1,0 +1,33 @@
+<!--pages/Feedback/Feedback.wxml-->
+<button type="primary" bindtap="click">返　回</button>
+<!--toast消息框显示2秒，并绑定事件-->
+<toast hidden="{{hiddenToast}}" duration="2000" bindchange="toastHidden">提交反馈成功!</toast>
+
+
+<form bindreset="formSubmit">
+
+  <view class="section">
+    <view class="picker">手机号/QQ号</view>
+    <view class="inputView">
+      <input class="input" bindinput="bindInput1" bindconfirm="confirm1" confirm-type="next" placeholder="请输入手机号/QQ，以便我们与您联系" />
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="picker">反馈内容</view>
+    <view class="textarea">
+      <textarea class="textareaView" bindinput="bindInput2" focus="{{focus1}}" confirm-type="done" placeholder="请输入您的意见反馈" maxlength="-1" />
+    </view>
+  </view>
+
+  <view class="help">
+    <text>温馨提示：\n　　您如果有图片等更多内容的反馈，可以点击右上角【更多（•••）】-【关于】，然后关注公众号进行意见反馈。</text>
+  </view>
+
+  <view class="btn">
+    <button form-type="reset" type="primary">
+        <text>提交反馈</text>
+      </button>
+    <text style="color: rgba(255,255,255,0); font-size: 1rem;">00000</text>
+  </view>
+</form>

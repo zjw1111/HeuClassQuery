@@ -1,0 +1,84 @@
+<!--pages/BaaS/BaaS.wxml-->
+
+<!--toast消息框显示，并绑定事件-->
+<toast hidden="{{hiddenToast}}" bindchange="toastHidden">删除成功!</toast>
+
+<view style="display: flex; height: 200rpx;">
+  <view class="btn-area">
+    <navigator url="/pages/input/input" hover-class="navigator-hover">
+      <form report-submit='true' bindsubmit='getFormId'>
+        <button type="primary" form-type='submit'>\r\n添加实验\r\n\r\n</button>
+      </form>
+    </navigator>
+  </view>
+  <view class="weather" style="display: block;" bindtap="{{getlocation}}">
+    <text>{{weatherData}}</text>
+    <view hidden="{{WeatherHidden}}">
+      <image src="{{url1}}" style="width: 80rpx; height: 60rpx;" mode="widthFix"></image>
+      <text>\t</text>
+      <image src="{{url2}}" style="width: 80rpx; height: 60rpx;" mode="widthFix"></image>
+    </view>
+    <view hidden="{{!WeatherHidden}}" style="font-size: 0.8rem; color: #cd0f17">
+      <text>\n</text>
+      <view>点击此处授权地理位置信息</view>
+      <view>以加载当前天气</view>
+    </view>
+  </view>
+</view>
+<view class="table">
+  <view class="tr bg-w" style="height: 140rpx">
+    <view class="th">实验时间</view>
+    <view class="th">项目</view>
+    <view class="th">实验室</view>
+    <view class="th" style="width:20%;">座号</view>
+  </view>
+  <view wx:if="{{listData.length}}">
+    <scroll-view scroll-y="true" style="height: {{height - 350}}rpx;">
+      <block wx:for="{{listData}}">
+        <view class="tr bg-g cg" bindlongtap="longtap" data-id="{{index}}" wx:if="{{index % 2 == 0 && item.time < now}}">
+          <view class="td" data-id="{{index}}">{{time[index]}}</view>
+          <view class="td" data-id="{{index}}">{{item.name}}</view>
+          <view class="td" data-id="{{index}}">{{item.where}}</view>
+          <view class="tz" data-id="{{index}}">{{item.at}}</view>
+        </view>
+        <view class="tr bg-g cr" bindlongtap="longtap" data-id="{{index}}" wx:elif="{{index % 2 == 0 && item.time < now + 777600}}">
+          <view class="td" data-id="{{index}}">{{time[index]}}</view>
+          <view class="td" data-id="{{index}}">{{item.name}}</view>
+          <view class="td" data-id="{{index}}">{{item.where}}</view>
+          <view class="tz" data-id="{{index}}">{{item.at}}</view>
+        </view>
+        <view class="tr bg-g" bindlongtap="longtap" data-id="{{index}}" wx:elif="{{index % 2 == 0 && item.time >= now + 777600}}">
+          <view class="td" data-id="{{index}}">{{time[index]}}</view>
+          <view class="td" data-id="{{index}}">{{item.name}}</view>
+          <view class="td" data-id="{{index}}">{{item.where}}</view>
+          <view class="tz" data-id="{{index}}">{{item.at}}</view>
+        </view>
+        <view class="tr bg-w cg" bindlongtap="longtap" data-id="{{index}}" wx:elif="{{index % 2 == 1 && item.time < now}}">
+          <view class="td" data-id="{{index}}">{{time[index]}}</view>
+          <view class="td" data-id="{{index}}">{{item.name}}</view>
+          <view class="td" data-id="{{index}}">{{item.where}}</view>
+          <view class="tz" data-id="{{index}}">{{item.at}}</view>
+        </view>
+        <view class="tr bg-w cr" bindlongtap="longtap" data-id="{{index}}" wx:elif="{{index % 2 == 1 && item.time < now + 777600}}">
+          <view class="td" data-id="{{index}}">{{time[index]}}</view>
+          <view class="td" data-id="{{index}}">{{item.name}}</view>
+          <view class="td" data-id="{{index}}">{{item.where}}</view>
+          <view class="tz" data-id="{{index}}">{{item.at}}</view>
+        </view>
+        <view class="tr bg-w" bindlongtap="longtap" data-id="{{index}}" wx:elif="{{index % 2 == 1 && item.time >= now + 777600}}">
+          <view class="td" data-id="{{index}}">{{time[index]}}</view>
+          <view class="td" data-id="{{index}}">{{item.name}}</view>
+          <view class="td" data-id="{{index}}">{{item.where}}</view>
+          <view class="tz" data-id="{{index}}">{{item.at}}</view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+  <view wx:else>
+    <view class='help'>
+      <text>◉新用户请点击左上角↖添加实验\n</text>
+      <text>◉若已添加实验但网络情况不佳，可下拉刷新重试</text>
+    </view>
+  </view>
+
+</view>
