@@ -1,4 +1,6 @@
 // pages/Feedback/Feedback.js
+const AV = require('../../utils/av-weapp-min.js');
+var AVObject = AV.Object.extend('FEEDBACK');
 Page({
 
   /**
@@ -49,17 +51,13 @@ Page({
     }
     console.log('form发生了submit事件，携带数据为：', e)
 
-    // 向 tableID 为 this.data.tableID (918) 的数据表插入一条记录
-    let tableID = this.data.tableID_Feedback
-    let objects = {
-      tableID,
-      data: e
-    }
-    wx.BaaS.createRecord(objects).then((res) => {
-      // success
-    }, (err) => {
-      // err
-    })
+    var todo = new AVObject();
+    todo.set(e);
+    todo.save().then(function (todo) {
+      // 成功保存之后，执行其他逻辑.
+    }, function (error) {
+      // 异常处理
+    });
 
     this.setData({
       hiddenToast: !this.data.hiddenToast,

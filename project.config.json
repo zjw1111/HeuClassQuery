@@ -27,7 +27,14 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "input",
+					"pathName": "pages/input/input",
+					"query": ""
+				}
+			]
 		}
 	}
 }

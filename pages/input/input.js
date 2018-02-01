@@ -1,6 +1,7 @@
 // pages/input/input.js
-// 页面最前为测试用函数
 var util = require('../../utils/util.js')
+const AV = require('../../utils/av-weapp-min.js');
+var AVObject = AV.Object.extend('SHIYAN');
 Page({
 
   /**
@@ -13,8 +14,6 @@ Page({
     min: '00',
     value: [0, 0],
 
-    tableID: 247,
-    tableID_Setting: 246,
     hiddenToast: true,
     selectPerson: true,
     firstPerson: '--请选择--',
@@ -52,7 +51,10 @@ Page({
       subj: e.detail.value,
       selectArea: false,
       selectPerson: true,
-      firstPerson: '--请选择--'
+      firstPerson: '--请选择--',
+      where: "",
+      at: 0,
+      name: ""
     })
     if (e.detail.value == 1) {
       this.setData({
@@ -99,14 +101,6 @@ Page({
     console.log(e)
   },
 
-  // 获取 formId
-  getFormId(e) {
-    console.log(e.detail.formId);
-    var FormID = e.detail.formId;
-    console.log(FormID);
-    wx.BaaS.wxReportTicket(FormID);
-  },
-
   // toast显示时间到时处理业务
   toastHidden: function () {
     this.setData({
@@ -123,12 +117,18 @@ Page({
   // 获取 实验名称 数据
   loading() {
     let that = this
-    var class1 = wx.BaaS.storage.get('class1');
-    var class2 = wx.BaaS.storage.get('class2');
-    that.setData({
-      class1: class1,
-      class2: class2
-    })
+    try {
+      var class1 = wx.getStorageSync('class1');
+      var class2 = wx.getStorageSync('class2');
+      if (class1 || class2) {
+        that.setData({
+          class1: class1,
+          class2: class2
+        })
+      }
+    } catch (e) {
+      // Do something when catch error
+    }
   },
 
   bindInput1: function (e) {
@@ -161,56 +161,83 @@ Page({
     })
   },
 
-  formSubmit: function () {
+  formSubmit: function (e) {
     var stringTime = this.data.date + "T" + this.data.time + ":00+08:00";
     var time = Date.parse(new Date(stringTime));
-    // this.test_data("strtime: " + stringTime + "\n && \n unixtime", time / 1000);
     var newDate = new Date();
     newDate.setTime(time);
     var time_str = util.formatTime(newDate);
     time = time / 1000;
-    var e = {
+    var ee = {
       name: this.data.name,
       where: this.data.where,
       at: this.data.at,
       time: time,
       time_str: time_str
     }
-    console.log('form发生了submit事件，携带数据为：', e)
+    console.log('form发生了submit事件，携带数据为：', ee)
 
-    // 向 tableID 为 this.data.tableID (247) 的数据表插入一条记录
-    let tableID = this.data.tableID
-    let objects = {
-      tableID,
-      data: e
+    var FormID = e.detail.formId;
+    console.log(FormID);
+    var l = 'https://zjw1111.eicp.net/formId.php';
+    var d = {
+      access_token: wx.getStorageSync('token'),
+      data: {
+        touser: wx.getStorageSync('user').authData.lc_weapp.openid,
+        template_id: 'JZ3ntsuPmdhmq4G_nKKluOrciUiaamPns775re5lPZY',//这个是1、申请的模板消息id，
+        page: '/pages/BaaS/BaaS',
+        form_id: FormID,
+        data: {
+          "keyword1": {
+            "value": ee.name,
+            "color": "#000000"
+          },
+          "keyword2": {
+            "value": ee.where,
+            "color": "#000000"
+          },
+          "keyword3": {
+            "value": ee.at,
+            "color": "#000000"
+          },
+          "keyword4": {
+            "value": ee.time_str,
+            "color": "#ff0000"
+          },
+        },
+        emphasis_keyword: 'keyword1.DATA'
+      }
     }
-    wx.BaaS.createRecord(objects).then((res) => {
-      // success
-    }, (err) => {
-      // err
-    })
+    wx.request({
+      url: l,
+      data: d,
+      method: 'GET',
+      success: function (res) {
+        console.log(res);
+      }
+    });
+
+    var todo = new AVObject();
+    todo.set(ee);
+    todo.save().then(function (todo) {
+      // 成功保存之后，执行其他逻辑.
+    }, function (error) {
+      // 异常处理
+    });
 
     this.setData({
       hiddenToast: !this.data.hiddenToast,
-      firstPerson: '--请选择--',
-      date: this.data.DayBegin,
-      time: "08:00",
-      where: "",
-      at: 0,
-      name: ""
     })
   },
   bindDateChange: function (e) {
     this.setData({
       date: e.detail.value
     })
-    // this.test_data("date", this.data.date)
   },
   bindTimeChange: function (e) {
     this.setData({
       time: e.detail.value
     })
-    // this.test_data("time", this.data.time)
   },
 
   /**
@@ -226,73 +253,5 @@ Page({
       DayEnd: dayEnd,
       date: dayBegin
     })
-    // this.test_data("date", this.data.date)
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
-
-  // 测试用函数
-  test_data: function (str, e) {
-    str = str + ": " + e;
-    console.log(str);
-
-    // 向 tableID 为 2282 的数据表插入一条记录
-    let tableID = 2282
-    let Product = new wx.BaaS.TableObject(tableID)
-    let product = Product.create()
-
-    // 设置方式一
-    let event = {
-      testdata: str
-    }
-    product.set(event).save().then((res) => {
-      // success
-    }, (err) => {
-      // err
-    })
-
-
-  }
-
 })

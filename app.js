@@ -1,47 +1,52 @@
 //app.js
-//BaaS SDK
-require('./utils/sdk-v1.1.0');
+const AV = require('./utils/av-weapp-min.js');
 const clientID = '9adb490f6d8b444da712'
+
+// LeanCloud 应用的 ID 和 Key
+AV.init({
+  appId: 'JlzVT3CwIaCukJfMBqcpy1pb-gzGzoHsz',
+  appKey: 'Rpje309gybmOx43HuKWHnq3n',
+});
 
 App({
   onLaunch: function () {
-    wx.BaaS.init(clientID)
-
     /*调用API从本地缓存中获取数据
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     */
 
-    let userId = this.getUserId()
-    console.log('***' + userId)
-    if (!userId) {
-      wx.BaaS.login()
-        .then(res => {
-          console.log('BaaS is logined!')
-        }).catch(err => {
-          console.dir(err)
+    if (!wx.getStorageSync('user')) {
+      AV.User.loginWithWeapp().then(user => {
+        wx.setStorage({
+          key: "user",
+          data: user
         })
-    }
-  },
-
-  getUserId() {
-    if (this.userId) {
-      return this.userId
+      }).catch(console.error);
     }
 
-    this.userId = wx.BaaS.storage.get('uid')
-    return this.userId
+
+    wx.request({
+      url: 'https://zjw1111.eicp.net/token.php',
+      method: 'GET',
+      success: function (res) {
+        console.log(res);
+        wx.setStorage({
+          key: 'token',
+          data: res.data.access_token,
+        })
+      }
+    })
   },
 
-  getUserInfo() {
-    if (this.userInfo) {
-      return this.userInfo
-    }
+  // getUserInfo() {
+  //   if (this.userInfo) {
+  //     return this.userInfo
+  //   }
 
-    this.userInfo = wx.BaaS.storage.get('userinfo')
-    return this.userInfo
-  },
+  //   this.userInfo = wx.BaaS.storage.get('userinfo')
+  //   return this.userInfo
+  // },
 
 /*
   getUserInfo:function(cb){
@@ -63,9 +68,7 @@ App({
     }
   },
 */
-  
 
   globalData:{
-    userInfo: wx.BaaS.storage.get('userinfo')
   }
 })

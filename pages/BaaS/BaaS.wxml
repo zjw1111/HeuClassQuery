@@ -6,9 +6,9 @@
 <view style="display: flex; height: 200rpx;">
   <view class="btn-area">
     <navigator url="/pages/input/input" hover-class="navigator-hover">
-      <form report-submit='true' bindsubmit='getFormId'>
+      <!-- <form report-submit='true' bindsubmit='getFormId'> -->
         <button type="primary" form-type='submit'>\r\n添加实验\r\n\r\n</button>
-      </form>
+      <!-- </form> -->
     </navigator>
   </view>
   <view class="weather" style="display: block;" bindtap="{{getlocation}}">
@@ -35,37 +35,37 @@
   <view wx:if="{{listData.length}}">
     <scroll-view scroll-y="true" style="height: {{height - 350}}rpx;">
       <block wx:for="{{listData}}">
-        <view class="tr bg-g cg" bindlongtap="longtap" data-id="{{index}}" wx:if="{{index % 2 == 0 && item.time < now}}">
+        <view class="tr bg-g cg" bindlongpress="longtap" data-id="{{index}}" wx:if="{{index % 2 == 0 && item.time < now}}">
           <view class="td" data-id="{{index}}">{{time[index]}}</view>
           <view class="td" data-id="{{index}}">{{item.name}}</view>
           <view class="td" data-id="{{index}}">{{item.where}}</view>
           <view class="tz" data-id="{{index}}">{{item.at}}</view>
         </view>
-        <view class="tr bg-g cr" bindlongtap="longtap" data-id="{{index}}" wx:elif="{{index % 2 == 0 && item.time < now + 777600}}">
+        <view class="tr bg-g cr" bindlongpress="longtap" data-id="{{index}}" wx:elif="{{index % 2 == 0 && item.time < now + 777600}}">
           <view class="td" data-id="{{index}}">{{time[index]}}</view>
           <view class="td" data-id="{{index}}">{{item.name}}</view>
           <view class="td" data-id="{{index}}">{{item.where}}</view>
           <view class="tz" data-id="{{index}}">{{item.at}}</view>
         </view>
-        <view class="tr bg-g" bindlongtap="longtap" data-id="{{index}}" wx:elif="{{index % 2 == 0 && item.time >= now + 777600}}">
+        <view class="tr bg-g" bindlongpress="longtap" data-id="{{index}}" wx:elif="{{index % 2 == 0 && item.time >= now + 777600}}">
           <view class="td" data-id="{{index}}">{{time[index]}}</view>
           <view class="td" data-id="{{index}}">{{item.name}}</view>
           <view class="td" data-id="{{index}}">{{item.where}}</view>
           <view class="tz" data-id="{{index}}">{{item.at}}</view>
         </view>
-        <view class="tr bg-w cg" bindlongtap="longtap" data-id="{{index}}" wx:elif="{{index % 2 == 1 && item.time < now}}">
+        <view class="tr bg-w cg" bindlongpress="longtap" data-id="{{index}}" wx:elif="{{index % 2 == 1 && item.time < now}}">
           <view class="td" data-id="{{index}}">{{time[index]}}</view>
           <view class="td" data-id="{{index}}">{{item.name}}</view>
           <view class="td" data-id="{{index}}">{{item.where}}</view>
           <view class="tz" data-id="{{index}}">{{item.at}}</view>
         </view>
-        <view class="tr bg-w cr" bindlongtap="longtap" data-id="{{index}}" wx:elif="{{index % 2 == 1 && item.time < now + 777600}}">
+        <view class="tr bg-w cr" bindlongpress="longtap" data-id="{{index}}" wx:elif="{{index % 2 == 1 && item.time < now + 777600}}">
           <view class="td" data-id="{{index}}">{{time[index]}}</view>
           <view class="td" data-id="{{index}}">{{item.name}}</view>
           <view class="td" data-id="{{index}}">{{item.where}}</view>
           <view class="tz" data-id="{{index}}">{{item.at}}</view>
         </view>
-        <view class="tr bg-w" bindlongtap="longtap" data-id="{{index}}" wx:elif="{{index % 2 == 1 && item.time >= now + 777600}}">
+        <view class="tr bg-w" bindlongpress="longtap" data-id="{{index}}" wx:elif="{{index % 2 == 1 && item.time >= now + 777600}}">
           <view class="td" data-id="{{index}}">{{time[index]}}</view>
           <view class="td" data-id="{{index}}">{{item.name}}</view>
           <view class="td" data-id="{{index}}">{{item.where}}</view>

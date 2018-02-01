@@ -1,5 +1,6 @@
 // 获取应用实例
 let app = getApp();
+const AV = require('../../utils/av-weapp-min.js');
 let wxParser = require('../../wxParser/index');
 
 Page({
@@ -17,29 +18,26 @@ Page({
   onLoad: function () {
     let that = this;
 
-    // 获取 内容ID 为 1244 的内容详情
-    let richTextID = 1244;
-    let objects = { richTextID };
-    wx.BaaS.getContent(objects).then((res) => {
-      // success
-      that.setData({
-        html: res.data.content,
-        title: res.data.title
+    new AV.Query('richtext')
+      .equalTo('description', 'help')
+      .find()
+      .then(res => {
+        this.setData({
+          html: res[0].attributes.content,
+          title: res[0].attributes.title
+        })
+        wxParser.parse({
+          bind: 'richText',
+          html: that.data.html,
+          target: that,
+          enablePreviewImage: true,
+          tapLink: (url) => {
+            wx.navigateTo({
+              url
+            })
+          }
+        });
       })
-      wxParser.parse({
-        bind: 'richText',
-        html: that.data.html,
-        target: that,
-        enablePreviewImage: true,
-        tapLink: (url) => {
-          wx.navigateTo({
-            url
-          })
-        }
-      });
-    }, (err) => {
-      // err
-    });
-
+      .catch(console.error);
   }
 })

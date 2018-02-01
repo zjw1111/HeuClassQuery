@@ -1,6 +1,8 @@
 // pages/BaaS/BaaS.js
 var util = require('../../utils/util.js')
 var bmap = require('../../utils/bmap-wx.min.js')
+const AV = require('../../utils/av-weapp-min.js');
+var app = getApp();
 Page({
 
   /**
@@ -8,8 +10,6 @@ Page({
    */
   data: {
     listData: [],
-    tableID: 247,
-    tableID_Setting: 246,
     time: [],
     height: 500,
     hiddenToast: true,
@@ -28,45 +28,31 @@ Page({
     })
   },
 
-  // 获取 formId
-  getFormId(e) {
-    console.log(e.detail.formId);
-    var FormID = e.detail.formId;
-    console.log(FormID);
-    wx.BaaS.wxReportTicket(FormID);
-  },
-
   // 获取 已选实验列表 数据
   loading() {
     let that = this
-    let tableID = this.data.tableID
-    let limit = 100;
-    let objects = {
-      tableID,
-      limit,
-      order_by: 'time',
-      time__gte: parseInt(Date.now() / 1000 - 777600)
-    }
+    new AV.Query('SHIYAN')
+      .ascending('time')
+      .limit(50)
+      .greaterThanOrEqualTo('time', parseInt(Date.now() / 1000 - 777600))
+      .find()
+      .then(res => {
+        this.setData({
+          listData: res
+        })
+        var newDate = new Date();
+        var time = [];
+        var length = this.data.listData.length
+        for (var i = 0; i < length; i++) {
+          newDate.setTime(this.data.listData[i].attributes.time * 1000)
+          time[i] = util.formatTime(newDate)
+        }
+        that.setData({
+          time: time
+        })
+      })
+      .catch(console.error);
 
-    wx.BaaS.getRecordList(objects).then((res) => {
-      that.setData({
-        listData: res.data.objects
-      })
-      console.log('success')
-      var newDate = new Date();
-      var time = [];
-      var length = this.data.listData.length
-      for (var i = 0; i < length; i++) {
-        newDate.setTime(this.data.listData[i].time * 1000)
-        time[i] = util.formatTime(newDate)
-      }
-      that.setData({
-        time: time
-      })
-    }, (err) => {
-      console.dir(err)
-      console.log('fail')
-    });
     that.loading2()
   },
 
@@ -74,30 +60,27 @@ Page({
   // 获取 实验名称 数据
   loading2() {
     let that = this
-    let tableID = this.data.tableID_Setting
-    let objects_a = {
-      tableID,
-      mark: 'a',
-    }
-    wx.BaaS.getRecordList(objects_a).then((res) => {
-      wx.BaaS.storage.set('class1', res.data.objects);
-      console.log(res)
-      console.log(res.data.objects)
-    }, (err) => {
-      console.dir(err)
-    });
+    new AV.Query('SETTING')
+      .equalTo('mark', 'a')
+      .find()
+      .then(class1 => {
+        wx.setStorage({
+          key: "class1",
+          data: class1
+        })
+      })
+      .catch(console.error);
 
-    let objects_b = {
-      tableID,
-      mark: 'b',
-    }
-    wx.BaaS.getRecordList(objects_b).then((res) => {
-      wx.BaaS.storage.set('class2', res.data.objects);
-      console.log(res)
-      console.log(res.data.objects)
-    }, (err) => {
-      console.dir(err)
-    });
+    new AV.Query('SETTING')
+      .equalTo('mark', 'b')
+      .find()
+      .then(class2 => {
+        wx.setStorage({
+          key: "class2",
+          data: class2
+        })
+      })
+      .catch(console.error);
   },
 
   weather() {
@@ -146,31 +129,36 @@ Page({
 
   longtap: function (e) {
     var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res.windowHeight)
+        that.setData({
+          height: res.windowHeight * 750 / res.screenWidth
+        })
+      }
+    })
     wx.showActionSheet({
       itemList: ['删除实验'],
       success: function (res) {
         if (res.tapIndex == 0) {
           wx.showModal({
             title: '删除实验',
-            content: '你确定要删除实验【' + that.data.listData[e.target.dataset.id].name + '】吗？',
+            content: '你确定要删除实验【' + that.data.listData[e.target.dataset.id].attributes.name + '】吗？',
             success: function (res) {
               if (res.confirm) {
-                let tableID = that.data.tableID
-                let recordID = that.data.listData[e.target.dataset.id].id
-                let objects = {
-                  tableID,
-                  recordID
-                }
-
-                wx.BaaS.deleteRecord(objects).then((res) => {
-                  // success
+                var todo = AV.Object.createWithoutData(
+                  'SHIYAN',
+                  that.data.listData[e.target.dataset.id].id
+                );
+                todo.destroy().then(function (success) {
+                  // 删除成功
                   that.setData({
                     hiddenToast: !that.data.hiddenToast
                   })
                   that.loading()
-                }, (err) => {
-                  // err
-                })
+                }, function (error) {
+                  // 删除失败
+                });
               }
             }
           })
@@ -184,8 +172,14 @@ Page({
    */
   onLoad: function (options) {
     console.log("onLoad")
-    //this.loading()
     this.weather()
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    console.log("onReady")
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
@@ -195,13 +189,6 @@ Page({
         })
       }
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    console.log("onReady")
   },
 
   /**
@@ -222,6 +209,16 @@ Page({
       wx.hideNavigationBarLoading() //完成停止加载
       wx.stopPullDownRefresh() //停止下拉刷新
     }, 1000)
+
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res.windowHeight)
+        that.setData({
+          height: res.windowHeight * 750 / res.screenWidth
+        })
+      }
+    })
   },
 
   /**
