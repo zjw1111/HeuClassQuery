@@ -129,14 +129,6 @@ Page({
 
   longtap: function (e) {
     var that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        console.log(res.windowHeight)
-        that.setData({
-          height: res.windowHeight * 750 / res.screenWidth
-        })
-      }
-    })
     wx.showActionSheet({
       itemList: ['删除实验'],
       success: function (res) {
@@ -181,14 +173,25 @@ Page({
   onReady: function () {
     console.log("onReady")
     var that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        console.log(res.windowHeight)
+    // wx.getSystemInfo({
+    //   success: function (res) {
+    //     console.log(res.windowHeight)
+    //     that.setData({
+    //       height: res.windowHeight * 750 / res.screenWidth
+    //     })
+    //   }
+    // })
+    setTimeout(function () {
+      var query = wx.createSelectorQuery()
+      query.select('.getheight').boundingClientRect()
+      query.selectViewport().scrollOffset()
+      query.exec(function (res) {
+        console.log(parseInt(res[0].height));
         that.setData({
-          height: res.windowHeight * 750 / res.screenWidth
+          height: res[0].height * 750 / res[0].width
         })
-      }
-    })
+      })
+    }, 150);
   },
 
   /**
@@ -209,16 +212,6 @@ Page({
       wx.hideNavigationBarLoading() //完成停止加载
       wx.stopPullDownRefresh() //停止下拉刷新
     }, 1000)
-
-    var that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        console.log(res.windowHeight)
-        that.setData({
-          height: res.windowHeight * 750 / res.screenWidth
-        })
-      }
-    })
   },
 
   /**

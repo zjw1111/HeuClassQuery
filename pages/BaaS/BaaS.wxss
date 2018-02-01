@@ -3,6 +3,9 @@
   border: 0px solid darkgray;
   padding: 0 4rpx;
 }
+.getheight {
+  position:fixed;height:100%;width:100%;z-index:-100;opacity:0;
+}
 .tr {
   display: flex;
   width: 100%;

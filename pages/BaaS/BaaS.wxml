@@ -2,7 +2,7 @@
 
 <!--toast消息框显示，并绑定事件-->
 <toast hidden="{{hiddenToast}}" bindchange="toastHidden">删除成功!</toast>
-
+<view class='getheight'></view>
 <view style="display: flex; height: 200rpx;">
   <view class="btn-area">
     <navigator url="/pages/input/input" hover-class="navigator-hover">
