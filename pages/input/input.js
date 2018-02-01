@@ -197,7 +197,7 @@ Page({
             "color": "#000000"
           },
           "keyword3": {
-            "value": ee.at,
+            "value": '座位号: '+ee.at,
             "color": "#000000"
           },
           "keyword4": {
