@@ -13,6 +13,7 @@ Page({
     mins: ['00', '30'],
     min: '00',
     value: [0, 0],
+    url: "zjw1111.eicp.net",
 
     hiddenToast: true,
     selectPerson: true,
@@ -120,10 +121,15 @@ Page({
     try {
       var class1 = wx.getStorageSync('class1');
       var class2 = wx.getStorageSync('class2');
+      var url = wx.getStorageSync('url');
       if (class1 || class2) {
         that.setData({
           class1: class1,
           class2: class2
+        })
+      } if (url) {
+        that.setData({
+          url: url.name
         })
       }
     } catch (e) {
@@ -179,13 +185,13 @@ Page({
 
     var FormID = e.detail.formId;
     console.log(FormID);
-    var l = 'https://zjw1111.eicp.net/formId.php';
+    var l = 'https://' + this.data.url + '/formId.php';
     var d = {
       access_token: wx.getStorageSync('token'),
       data: {
         touser: wx.getStorageSync('user').authData.lc_weapp.openid,
         template_id: 'JZ3ntsuPmdhmq4G_nKKluOrciUiaamPns775re5lPZY',//这个是1、申请的模板消息id，
-        page: '/pages/BaaS/BaaS',
+        page: 'pages/BaaS/BaaS',
         form_id: FormID,
         data: {
           "keyword1": {
