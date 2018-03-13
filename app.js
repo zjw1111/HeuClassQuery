@@ -27,7 +27,7 @@ App({
 
 
     wx.request({
-      url: 'https://zjw1111.eicp.net/token.php',
+      url: 'https://zjw1111.wicp.net/token.php',
       method: 'GET',
       success: function (res) {
         console.log(res);

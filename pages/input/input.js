@@ -13,7 +13,7 @@ Page({
     mins: ['00', '30'],
     min: '00',
     value: [0, 0],
-    url: "zjw1111.eicp.net",
+    url: "zjw1111.wicp.net",
 
     hiddenToast: true,
     selectPerson: true,
@@ -121,17 +121,18 @@ Page({
     try {
       var class1 = wx.getStorageSync('class1');
       var class2 = wx.getStorageSync('class2');
-      var url = wx.getStorageSync('url');
+      // var url = wx.getStorageSync('url');
       if (class1 || class2) {
         that.setData({
           class1: class1,
           class2: class2
         })
-      } if (url) {
-        that.setData({
-          url: url.name
-        })
       }
+      // if (url) {
+      //   that.setData({
+      //     url: url.name
+      //   })
+      // }
     } catch (e) {
       // Do something when catch error
     }
