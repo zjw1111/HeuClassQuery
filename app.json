@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/BaaS/BaaS",
     "pages/index/index",
+    "pages/about/about",
     "pages/input/input",
     "pages/help/help",
     "pages/Feedback/Feedback",
@@ -16,13 +16,13 @@
   "tabBar": {
     "list": [
       {
-        "pagePath": "pages/BaaS/BaaS",
+        "pagePath": "pages/index/index",
         "text": "实验",
         "iconPath": "image/index2.png",
         "selectedIconPath": "image/index.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/about/about",
         "text": "关于",
         "iconPath": "image/about2.png",
         "selectedIconPath": "image/about.png"

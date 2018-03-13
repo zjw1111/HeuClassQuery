@@ -1,0 +1,25 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <image class="userinfo-avatar" src="../../image/image.jpg" background-size="cover"></image>
+  </view>
+  <view class="usermotto">
+    <text class="window">Hello</text>
+  </view>
+</view>
+
+<view class="image">
+  <button bindtap="btntap" style="font-size: 0.9rem;">使用说明</button>
+  <button bindtap="btntap2" style="font-size: 0.9rem;">免责声明</button>
+  <navigator url="/pages/Feedback/Feedback" hover-class="navigator-hover">
+    <!--button bindtap="btntap3" style="font-size: 0.9rem;">意见反馈</button-->
+    <button style="font-size: 0.9rem;">意见反馈</button>
+  </navigator>
+  <navigator url="/pages/version/version" style="margin-top: 10rpx;" hover-class="navigator-hover">
+    <button size="mini" style=width: {{width}}px; font-size: 0.8rem;">版本号：V1.7</button>
+  </navigator>
+  <navigator url="/pages/version/version" style="margin-top: -5rpx;" hover-class="navigator-hover">
+    <button size="mini" style="width: {{width}}px; font-size: 0.8rem;">作者：HEU-Student　2018.02</button>
+  </navigator>
+  <!--text>{{motto}}</text-->
+</view>
