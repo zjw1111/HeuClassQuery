@@ -1,4 +1,5 @@
 # HeuClassQuery
+The wxapp for HEU_Class_Query
 
 ---
 
