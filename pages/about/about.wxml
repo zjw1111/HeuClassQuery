@@ -16,7 +16,7 @@
     <button style="font-size: 0.9rem;">意见反馈</button>
   </navigator>
   <navigator url="/pages/version/version" style="margin-top: 10rpx;" hover-class="navigator-hover">
-    <button size="mini" style=width: {{width}}px; font-size: 0.8rem;">版本号：V1.7</button>
+    <button size="mini" style="width: {{width}}px; font-size: 0.8rem;">版本号：V1.7</button>
   </navigator>
   <navigator url="/pages/version/version" style="margin-top: -5rpx;" hover-class="navigator-hover">
     <button size="mini" style="width: {{width}}px; font-size: 0.8rem;">作者：HEU-Student　2018.02</button>
