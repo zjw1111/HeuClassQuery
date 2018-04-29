@@ -10,12 +10,6 @@ AV.init({
 
 App({
   onLaunch: function () {
-    /*调用API从本地缓存中获取数据
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-    */
-
     if (!wx.getStorageSync('user')) {
       AV.User.loginWithWeapp().then(user => {
         wx.setStorage({
@@ -24,7 +18,6 @@ App({
         })
       }).catch(console.error);
     }
-
 
     wx.request({
       url: 'https://zjw1111.wicp.net/token.php',
@@ -38,36 +31,6 @@ App({
       }
     })
   },
-
-  // getUserInfo() {
-  //   if (this.userInfo) {
-  //     return this.userInfo
-  //   }
-
-  //   this.userInfo = wx.BaaS.storage.get('userinfo')
-  //   return this.userInfo
-  // },
-
-/*
-  getUserInfo:function(cb){
-    var that = this
-    if(this.globalData.userInfo){
-      typeof cb == "function" && cb(this.globalData.userInfo)
-    }else{
-      //调用登录接口
-      wx.login({
-        success: function () {
-          wx.getUserInfo({
-            success: function (res) {
-              that.globalData.userInfo = res.userInfo
-              typeof cb == "function" && cb(that.globalData.userInfo)
-            }
-          })
-        }
-      })
-    }
-  },
-*/
 
   globalData:{
   }

@@ -81,17 +81,6 @@ Page({
         })
       })
       .catch(console.error);
-
-    // new AV.Query('SETTING')
-    //   .equalTo('mark', 'url')
-    //   .find()
-    //   .then(url => {
-    //     wx.setStorage({
-    //       key: "url",
-    //       data: url[0]
-    //     })
-    //   })
-    //   .catch(console.error);
   },
 
   weather() {

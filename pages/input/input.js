@@ -9,10 +9,7 @@ Page({
    */
   data: {
     hours: ['13', '14', '15', '16', '17', '18', '19'],
-    hour: '13',
     mins: ['00', '30'],
-    min: '00',
-    value: [0, 0],
     url: "zjw1111.wicp.net",
 
     hiddenToast: true,
@@ -39,13 +36,6 @@ Page({
     focus2: false
   },
 
-  bindChange: function (e) {
-    const val = e.detail.value
-    this.setData({
-      hour: this.data.hours[val[0]],
-      min: this.data.mins[val[1]],
-    })
-  },
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value);
     this.setData({
@@ -121,18 +111,12 @@ Page({
     try {
       var class1 = wx.getStorageSync('class1');
       var class2 = wx.getStorageSync('class2');
-      // var url = wx.getStorageSync('url');
       if (class1 || class2) {
         that.setData({
           class1: class1,
           class2: class2
         })
       }
-      // if (url) {
-      //   that.setData({
-      //     url: url.name
-      //   })
-      // }
     } catch (e) {
       // Do something when catch error
     }
