@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/about/about",
     "pages/input/input",
+    "pages/report/report",
     "pages/help/help",
     "pages/Feedback/Feedback",
     "pages/version/version"

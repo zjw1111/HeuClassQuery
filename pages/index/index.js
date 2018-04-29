@@ -138,12 +138,24 @@ Page({
     })
   },
 
+  shorttap: function (e) {
+    var that = this;
+    wx.navigateTo({
+      url: '../report/report?name=' + that.data.listData[e.target.dataset.id].attributes.name,
+    })
+  },
+
   longtap: function (e) {
     var that = this;
     wx.showActionSheet({
-      itemList: ['删除实验'],
+      itemList: ['查看实验报告', '删除实验'],
       success: function (res) {
         if (res.tapIndex == 0) {
+          wx.navigateTo({
+            url: '../report/report?name=' + that.data.listData[e.target.dataset.id].attributes.name,
+          })
+        }
+        else if (res.tapIndex == 1) {
           wx.showModal({
             title: '删除实验',
             content: '你确定要删除实验【' + that.data.listData[e.target.dataset.id].attributes.name + '】吗？',
