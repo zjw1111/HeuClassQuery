@@ -176,7 +176,7 @@ Page({
       data: {
         touser: wx.getStorageSync('user').authData.lc_weapp.openid,
         template_id: 'JZ3ntsuPmdhmq4G_nKKluOrciUiaamPns775re5lPZY',//这个是1、申请的模板消息id，
-        page: 'pages/BaaS/BaaS',
+        page: 'pages/index/index',
         form_id: FormID,
         data: {
           "keyword1": {
@@ -195,8 +195,7 @@ Page({
             "value": ee.time_str,
             "color": "#ff0000"
           },
-        },
-        emphasis_keyword: 'keyword1.DATA'
+        }
       }
     }
     wx.request({
