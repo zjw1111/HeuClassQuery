@@ -7,21 +7,24 @@
   <view class="btn-area">
     <navigator url="/pages/input/input" hover-class="navigator-hover">
       <!-- <form report-submit='true' bindsubmit='getFormId'> -->
-        <button type="primary" form-type='submit'>\r\n添加实验\r\n\r\n</button>
+        <button type="primary" form-type='submit'>添加实验</button>
       <!-- </form> -->
     </navigator>
   </view>
-  <view class="weather" style="display: block;" bindtap="{{getlocation}}">
-    <text>{{weatherData}}</text>
-    <view hidden="{{WeatherHidden}}">
-      <image src="{{url1}}" style="width: 80rpx; height: 60rpx;" mode="widthFix"></image>
-      <text>\t</text>
-      <image src="{{url2}}" style="width: 80rpx; height: 60rpx;" mode="widthFix"></image>
-    </view>
-    <view hidden="{{!WeatherHidden}}" style="font-size: 0.8rem; color: #cd0f17">
-      <text>\n</text>
-      <view>点击此处授权地理位置信息</view>
-      <view>以加载当前天气</view>
+  <view style='width: 5%;'></view>
+  <view style='width: 60%;'>
+    <view class="weather" style="display: block;" bindtap="{{getlocation}}">
+      <text>{{weatherData}}</text>
+      <view hidden="{{WeatherHidden}}">
+        <image src="{{url1}}" style="width: 80rpx; height: 60rpx;" mode="widthFix"></image>
+        <text>\t</text>
+        <image src="{{url2}}" style="width: 80rpx; height: 60rpx;" mode="widthFix"></image>
+      </view>
+      <view hidden="{{!WeatherHidden}}" style="font-size: 0.8rem; color: #cd0f17">
+        <text>\n</text>
+        <view>点击此处授权地理位置信息</view>
+        <view>以加载当前天气</view>
+      </view>
     </view>
   </view>
 </view>
@@ -77,6 +80,7 @@
   <view wx:else>
     <view class='help'>
       <text>◉新用户请点击左上角↖添加实验\n</text>
+      <text>◉长按实验项显示更多功能菜单\n</text>
       <text>◉若已添加实验但网络情况不佳，可下拉刷新重试</text>
     </view>
   </view>
