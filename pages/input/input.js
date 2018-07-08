@@ -1,7 +1,7 @@
 // pages/input/input.js
 var util = require('../../utils/util.js')
 const AV = require('../../utils/av-weapp-min.js');
-var AVObject = AV.Object.extend('SHIYAN');
+var Shiyan = AV.Object.extend('SHIYAN');
 Page({
 
   /**
@@ -207,8 +207,9 @@ Page({
       }
     });
 
-    var todo = new AVObject();
+    var todo = new Shiyan();
     todo.set(ee);
+    todo.set('user', AV.Object.createWithoutData('_User', wx.getStorageSync('user').objectId))
     todo.save().then(function (todo) {
       // 成功保存之后，执行其他逻辑.
     }, function (error) {

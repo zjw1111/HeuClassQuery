@@ -6,6 +6,7 @@
     "pages/report/report",
     "pages/help/help",
     "pages/Feedback/Feedback",
+    "pages/Email/Email",
     "pages/version/version"
   ],
   "window": {
@@ -21,6 +22,12 @@
         "text": "实验",
         "iconPath": "image/index2.png",
         "selectedIconPath": "image/index.png"
+      },
+      {
+        "pagePath": "pages/Email/Email",
+        "text": "新 · 探索",
+        "iconPath": "image/new2.png",
+        "selectedIconPath": "image/new.png"
       },
       {
         "pagePath": "pages/about/about",

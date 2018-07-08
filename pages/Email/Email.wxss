@@ -1,0 +1,96 @@
+/* pages/Email/Email.wxss */
+
+.btn {
+  display: flex;
+  justify-content: center;
+  margin: 0.6rem;
+  position: fixed;
+  bottom: 20rpx;
+  width: 100%;
+  padding: 0 0rpx 0 0rpx
+}
+
+.btn button {
+  display: inline-block;
+  vertical-align: baseline;
+  width: 270rpx;
+  height: 80rpx;
+  margin: 0 4rpx;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font: 30rpx serif, Arial, Helvetica, sans-serif;
+  padding: 0.5rem 2rem;
+  text-shadow: 0 2rpx 2rpx rgba(0, 0, 0, 0.3);
+  border-radius: 2rem;
+  -webkit-box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #e8f0de;
+  border: solid 2rpx #538312;
+  background: #64991e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#7db72f), to(#4e7d0e));
+}
+
+.btn button text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.picker {
+  margin: 1.3rem 0.3rem 0.3rem 0.5rem;
+}
+
+.text {
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+}
+
+.btn button:active {
+  color: #e4efd7;
+  text-shadow: 0 2rpx 2rpx rgba(0, 0, 0, 0.3);
+  border: solid 2rpx #9bcd9b;
+  background: #64991e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#77aa31), to(#3c5d0e));
+}
+
+.input {
+  padding-left: 20rpx;
+  height: 88rpx;
+}
+
+.inputView {
+  border: 4rpx solid #bbdef8;
+  border-radius: 80rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-bottom: 30rpx;
+}
+.textarea {
+  padding-left: 20rpx;
+  height: 188rpx;
+}
+
+.textareaView {
+  border: 4rpx solid #bbdef8;
+  border-radius: 40rpx;
+  padding: 15rpx 15rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.help {
+  padding: 2rem 1rem;
+  color: #000;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: Helvetica;
+  text-shadow: 0 2rpx 0 #ccc, 0 4rpx 0 #c9c9c9, 0 6rpx 0 #bbb, 0 8rpx 0 #b9b9b9, 0 10rpx 0 #aaa, 0 12rpx 2rpx rgba(0,0,0,.1), 0 0 10rpx rgba(0,0,0,.1), 0 2rpx 6rpx rgba(0,0,0,.3), 0 6rpx 10rpx rgba(0,0,0,.2), 0 10rpx 20rpx rgba(0,0,0,.25), 0 20rpx 20rpx rgba(0,0,0,.2), 0 40rpx 40rpx rgba(0,0,0,.15);
+}

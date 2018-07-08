@@ -1,0 +1,24 @@
+<!--pages/Email/Email.wxml-->
+<!--toast消息框显示2秒，并绑定事件-->
+<toast hidden="{{hiddenToast}}" duration="2000" bindchange="toastHidden">邮箱地址更新成功!</toast>
+
+<form bindsubmit="formSubmit">
+
+  <view class="help">
+    <text>新功能 · 探索：\n\n　　输入邮箱地址后，您在每天晚上会收到第二天的实验提醒邮件。\n　　输入完邮箱地址并点击确定后，会直接覆盖旧的邮箱地址。\n　　如果您以后不再想收到提醒邮件，请在输入框为空的状态下点击确定按钮。</text>
+  </view>
+
+  <view class="section">
+    <view class="picker">邮箱</view>
+    <view class="inputView">
+      <input class="input" bindinput="bindInput1" confirm-type="done" placeholder="请输入新的邮箱地址" />
+    </view>
+  </view>
+
+  <view class="btn">
+    <button form-type="submit" type="primary">
+        <text>确定</text>
+      </button>
+    <text style="color: rgba(255,255,255,0); font-size: 1rem;">00000</text>
+  </view>
+</form>
