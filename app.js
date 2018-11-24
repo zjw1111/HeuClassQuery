@@ -1,4 +1,5 @@
 //app.js
+const mtjwxsdk = require('./utils/mtj-wx-sdk.js');
 const AV = require('./utils/av-weapp-min.js');
 const clientID = '9adb490f6d8b444da712'
 
