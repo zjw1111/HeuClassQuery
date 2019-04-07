@@ -1,4 +1,7 @@
 # HeuClassQuery
+[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/zjw1111/HeuClassQuery/blob/master/LICENSE)
+[![Badge](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu/#/zh_CN)
+
 The wxapp for HEU_Class_Query
 
 ---
